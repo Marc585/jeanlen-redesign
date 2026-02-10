@@ -333,7 +333,8 @@
     .product-image-wrapper img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.2));
+      object-fit: contain;
     }
 
     .floating-leaf {
@@ -472,9 +473,11 @@
       line-height: 1.4;
     }
 
-    .detail-image-large {
+    img.detail-image-large {
       width: 60%;
       max-width: 350px;
+      height: auto;
+      object-fit: contain;
       filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1043,11 +1046,7 @@
       <span class="floating-leaf">🍃</span>
       <span class="floating-leaf">🌿</span>
       <div class="product-image-wrapper">
-        <div class="product-placeholder">
-          <span class="bottle-icon">🧴</span>
-          <span class="product-label">Hand & Body Wash<br>Rosemary / Ginger</span>
-          <span class="product-sublabel">1,5 L Refill</span>
-        </div>
+        <img src="images/product-front.png" alt="Jean&Len Hand & Body Wash Rosemary/Ginger Refill 1,5L">
       </div>
     </div>
     <div class="hero-scroll-indicator">
@@ -1091,11 +1090,7 @@
   <!-- Product Detail -->
   <section class="product-detail">
     <div class="detail-visual">
-      <div class="product-placeholder detail-image-large">
-        <span class="bottle-icon">🧴</span>
-        <span class="product-label">Rosemary & Ginger</span>
-        <span class="product-sublabel">Hand & Body Wash</span>
-      </div>
+      <img class="detail-image-large" src="images/product-front.png" alt="Jean&Len Hand & Body Wash Rosemary/Ginger — Detailansicht">
     </div>
     <div class="detail-content reveal">
       <span class="detail-label">Das Produkt</span>
