@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jean&Len — Hand & Body Wash Rosemary/Ginger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #2c3e2d;
+      --sage: #7a9a7b;
+      --sage-light: #b8ccb4;
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --ginger: #c4703f;
+      --ginger-light: #e8a76c;
+      --charcoal: #2a2a2a;
+      --text: #3a3a3a;
+      --text-light: #6b6b6b;
+      --border: rgba(44, 62, 45, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--warm-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain Overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav.scrolled {
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--ginger);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--ginger);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-links a:hover { color: var(--forest); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-icon:hover { color: var(--forest); }
+
+    /* ── Hero Section ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem 6rem;
+      position: relative;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -30%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(ellipse at 30% 50%, rgba(184, 204, 180, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(44, 62, 45, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      width: fit-content;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--ginger);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--forest);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--ginger);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.9s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--forest);
+      color: white;
+      padding: 1rem 2.2rem;
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--ginger);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(44, 62, 45, 0.25);
+    }
+
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text-light);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .btn-secondary:hover { color: var(--forest); }
+
+    .price-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--forest);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.85s forwards;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-tag small {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-left: 0.5rem;
+    }
+
+    /* ── Hero Right / Image ── */
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(165deg, #e8e2d6 0%, #d4cfc3 40%, #c8ccb8 100%);
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196, 112, 63, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      width: 70%;
+      max-width: 420px;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      animation: heroImage 1s 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-image-wrapper img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
+    }
+
+    .floating-leaf {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.5;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-leaf:nth-child(2) { top: 15%; right: 10%; animation-delay: -2s; font-size: 1.5rem; }
+    .floating-leaf:nth-child(3) { bottom: 20%; left: 8%; animation-delay: -4s; font-size: 1.8rem; }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-light);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.2s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--sage-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--ginger);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+
+    /* ── Features Strip ── */
+    .features-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-item {
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      transition: background 0.4s;
+      cursor: default;
+    }
+
+    .feature-item:last-child { border-right: none; }
+
+    .feature-item:hover {
+      background: rgba(184, 204, 180, 0.08);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(44, 62, 45, 0.05);
+      color: var(--sage);
+    }
+
+    .feature-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-item p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── Product Detail Section ── */
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    .detail-visual {
+      position: relative;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+      overflow: hidden;
+    }
+
+    .detail-visual::before {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .detail-visual::after {
+      content: '"Frisch-würzig.\A Belebend natürlich."';
+      white-space: pre-wrap;
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--sage);
+      line-height: 1.4;
+    }
+
+    .detail-image-large {
+      width: 60%;
+      max-width: 350px;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .detail-visual:hover .detail-image-large {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    .detail-content {
+      padding: 6rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .detail-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ginger);
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      max-width: 440px;
+    }
+
+    .ingredient-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+    }
+
+    .tag {
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-light);
+      background: transparent;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .tag:hover {
+      border-color: var(--sage);
+      color: var(--forest);
+      background: rgba(184, 204, 180, 0.1);
+    }
+
+    /* ── Accordion ── */
+    .accordion {
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-header {
+      width: 100%;
+      padding: 1.2rem 0;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    .accordion-header:hover { color: var(--forest); }
+
+    .accordion-icon {
+      width: 24px;
+      height: 24px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .accordion-icon::before,
+    .accordion-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--sage);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .accordion-icon::before {
+      width: 12px;
+      height: 1.5px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .accordion-icon::after {
+      width: 1.5px;
+      height: 12px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .accordion-item.open .accordion-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .accordion-body-inner {
+      padding: 0 0 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ── Reviews Section ── */
+    .reviews {
+      padding: 6rem 6rem;
+      background: var(--forest);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reviews::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(196, 112, 63, 0.1) 0%, transparent 70%);
+    }
+
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .reviews-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+    }
+
+    .reviews-stars {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--ginger-light);
+    }
+
+    .reviews-stars span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+    }
+
+    .star-icons { font-size: 1.1rem; letter-spacing: 0.15em; }
+
+    .reviews-count {
+      font-size: 0.8rem;
+      opacity: 0.5;
+      font-weight: 300;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s;
+    }
+
+    .review-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .review-stars {
+      color: var(--ginger-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .review-author {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+
+    /* ── Sustainability / Refill CTA ── */
+    .sustainability {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    .sustain-content {
+      padding: 6rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--warm-white);
+    }
+
+    .sustain-content .detail-label { color: var(--sage); }
+
+    .sustain-visual {
+      background: linear-gradient(135deg, #d4cfc3, #c8ccb8);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .refill-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 15vw, 14rem);
+      font-weight: 300;
+      color: rgba(44, 62, 45, 0.08);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 1;
+    }
+
+    .refill-stat {
+      position: relative;
+      text-align: center;
+    }
+
+    .refill-stat .number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1;
+    }
+
+    .refill-stat .label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 4rem;
+      position: relative;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 80px;
+      background: var(--border);
+      align-self: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--charcoal);
+      color: white;
+      padding: 4rem 6rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand .logo {
+      color: white;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.5;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.82rem;
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+
+    .footer-col a:hover { color: rgba(255, 255, 255, 0.8); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      opacity: 0.3;
+      font-weight: 300;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--ginger);
+      color: var(--ginger);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroImage {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    @keyframes scrollDown {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Product Image Placeholder ── */
+    .product-placeholder {
+      width: 100%;
+      aspect-ratio: 3/5;
+      background: linear-gradient(145deg, rgba(122, 154, 123, 0.2), rgba(196, 112, 63, 0.15));
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px solid rgba(44, 62, 45, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(44, 62, 45, 0.06);
+      border-radius: 16px;
+    }
+
+    .product-placeholder .bottle-icon {
+      font-size: 4rem;
+      opacity: 0.6;
+    }
+
+    .product-placeholder .product-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--forest);
+      text-align: center;
+      padding: 0 2rem;
+      opacity: 0.7;
+    }
+
+    .product-placeholder .product-sublabel {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 3rem 4rem; }
+      .hero-right { min-height: 60vh; }
+      .product-detail { grid-template-columns: 1fr; }
+      .detail-content { padding: 4rem 3rem; }
+      .detail-visual { min-height: 50vh; }
+      .sustainability { grid-template-columns: 1fr; }
+      .sustain-visual { min-height: 40vh; }
+      .reviews { padding: 4rem 3rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      footer { padding: 3rem 2rem 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .features-strip { grid-template-columns: 1fr 1fr; }
+      .feature-item { border-bottom: 1px solid var(--border); }
+      .hero-left { padding: 7rem 1.5rem 3rem; }
+      .stat-row { flex-direction: column; gap: 2rem; align-items: center; }
+      .stat-divider { width: 60px; height: 1px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="logo">Jean<span>&</span>Len</a>
+    <ul class="nav-links">
+      <li><a href="#">Haare</a></li>
+      <li><a href="#">Körper</a></li>
+      <li><a href="#">Gesicht</a></li>
+      <li><a href="#">Nachfüllpacks</a></li>
+      <li><a href="#">Sale</a></li>
+    </ul>
+    <div class="nav-icons">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Nachfüllpack — 1,5 Liter
+      </div>
+      <h1 class="hero-title">
+        Hand & Body Wash<br>
+        <em>Rosemary</em> &<br>
+        <em>Ginger</em>
+      </h1>
+      <div class="price-tag">
+        17,99 € <small>11,99 €/Liter</small>
+      </div>
+      <p class="hero-subtitle">
+        Frisch-würziger Duft nach Rosmarin und Ingwer. Angenehm leichter Schaum mit sanfter Reinigung — frei von Parabenen, Silikonen und Mikroplastik.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary">
+          <span>In den Warenkorb</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary">
+          Auf die Wunschliste
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <span class="floating-leaf">🌿</span>
+      <span class="floating-leaf">🍃</span>
+      <span class="floating-leaf">🌿</span>
+      <div class="product-image-wrapper">
+        <div class="product-placeholder">
+          <span class="bottle-icon">🧴</span>
+          <span class="product-label">Hand & Body Wash<br>Rosemary / Ginger</span>
+          <span class="product-sublabel">1,5 L Refill</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+      Entdecken
+    </div>
+  </section>
+
+  <!-- Features Strip -->
+  <section class="features-strip">
+    <div class="feature-item reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Ohne Parabene</h3>
+      <p>Frei von schädlichen Konservierungsstoffen</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+      </div>
+      <h3>Ohne Silikone</h3>
+      <p>Natürliche Pflege ohne synthetische Zusätze</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Ohne Mikroplastik</h3>
+      <p>Kein Plastik in unseren Formulierungen</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <h3>Vegan</h3>
+      <p>100% tierversuchsfrei und vegan</p>
+    </div>
+  </section>
+
+  <!-- Product Detail -->
+  <section class="product-detail">
+    <div class="detail-visual">
+      <div class="product-placeholder detail-image-large">
+        <span class="bottle-icon">🧴</span>
+        <span class="product-label">Rosemary & Ginger</span>
+        <span class="product-sublabel">Hand & Body Wash</span>
+      </div>
+    </div>
+    <div class="detail-content reveal">
+      <span class="detail-label">Das Produkt</span>
+      <h2 class="detail-heading">Pflege, die<br>deine Haut verdient</h2>
+      <p class="detail-text">
+        Unser Hand & Body Wash mit Rosmarin und Ingwer reinigt sanft und hinterlässt ein erfrischendes,
+        belebendes Hautgefühl. Das 1,5-Liter-Nachfüllpack reicht für 3 Glasflaschen oder 6 kleine Handseifen —
+        so sparst du Verpackung und Geld.
+      </p>
+
+      <div class="ingredient-tags">
+        <span class="tag">Rosmarin</span>
+        <span class="tag">Ingwer</span>
+        <span class="tag">Panthenol</span>
+        <span class="tag">Zitronenöl</span>
+        <span class="tag">Orangenöl</span>
+        <span class="tag">Wacholderöl</span>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Inhaltsstoffe
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              Aqua, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Sodium Chloride, Panthenol,
+              Citrus Limon Peel Oil, Citrus Aurantium Dulcis Peel Oil, Juniperus Communis Fruit Oil,
+              Rosmarinus Officinalis Leaf Oil, Zingiber Officinale Root Oil, Sodium Benzoate,
+              Potassium Sorbate, Citric Acid, Limonene, Linalool.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Anwendung
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              Eine kleine Menge auf die feuchte Haut geben, sanft aufschäumen und gründlich abspülen.
+              Geeignet für die tägliche Hand- und Körperreinigung. Zum Nachfüllen einfach die Glasflasche
+              oder die kleine Handseife öffnen und auffüllen.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">
+            Versand & Rückgabe
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              Kostenloser Versand ab 49 €. Lieferung innerhalb von 2–4 Werktagen.
+              30 Tage Rückgaberecht bei ungeöffneten Produkten.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews">
+    <div class="reviews-header reveal">
+      <div>
+        <h2 class="reviews-title">Was unsere<br>Kunden sagen</h2>
+      </div>
+      <div class="reviews-stars">
+        <span>5.0</span>
+        <div>
+          <div class="star-icons">★★★★★</div>
+          <div class="reviews-count">71 Bewertungen</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Der Duft ist einfach fantastisch! Rosmarin und Ingwer — so frisch und belebend.
+        Und das Nachfüllpack hält ewig."</p>
+        <div class="review-author">Sandra M.</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Tolle Konsistenz, schäumt wunderbar und trocknet die Haut nicht aus.
+        Bin absoluter Fan der Nachfüllpacks!"</p>
+        <div class="review-author">Thomas K.</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Endlich eine Seife ohne den ganzen Chemie-Kram. Meine Haut fühlt sich
+        so viel besser an seit dem Wechsel."</p>
+        <div class="review-author">Lisa B.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainability -->
+  <section class="sustainability">
+    <div class="sustain-content reveal">
+      <span class="detail-label">Nachhaltigkeit</span>
+      <h2 class="detail-heading">Weniger Verpackung,<br>mehr Inhalt</h2>
+      <p class="detail-text">
+        Mit unserem 1,5-Liter-Nachfüllpack sparst du bis zu 80% Verpackungsmaterial im Vergleich
+        zu Einzelflaschen. Einfach nachfüllen, weiterverwenden und dabei die Umwelt schonen.
+      </p>
+      <button class="btn-primary">
+        <span>Alle Nachfüllpacks</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="sustain-visual">
+      <div class="refill-number">3×</div>
+      <div class="stat-row">
+        <div class="refill-stat reveal">
+          <div class="number">3</div>
+          <div class="label">Glasflaschen</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="refill-stat reveal">
+          <div class="number">6</div>
+          <div class="label">Handseifen</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="refill-stat reveal">
+          <div class="number">80%</div>
+          <div class="label">Weniger Plastik</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">Jean<span>&</span>Len</a>
+        <p>Ehrliche Pflege. Ohne den ganzen Mist.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produkte</h4>
+        <ul>
+          <li><a href="#">Haarpflege</a></li>
+          <li><a href="#">Körperpflege</a></li>
+          <li><a href="#">Gesichtspflege</a></li>
+          <li><a href="#">Nachfüllpacks</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#">Über uns</a></li>
+          <li><a href="#">Inhaltsstoffe</a></li>
+          <li><a href="#">Nachhaltigkeit</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Service</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Versand</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Jean&Len. Alle Rechte vorbehalten.</p>
+      <div class="footer-socials">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">TT</a>
+        <a href="#">YT</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Accordion
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const body = item.querySelector('.accordion-body');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-body').style.maxHeight = null;
+        });
+
+        // Open clicked
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Smooth parallax on hero image
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.product-image-wrapper');
+      if (hero) {
+        const scrolled = window.scrollY;
+        hero.style.transform = `translateY(${scrolled * 0.08}px)`;
+      }
+    });
+  </script>
+
+</body>
+</html>
